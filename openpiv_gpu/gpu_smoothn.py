@@ -8,7 +8,7 @@ import cupy as cp
 from math import prod, log10, log2, sqrt
 from cupyx.scipy.fft import dct, idct
 from scipy.optimize import fmin_l_bfgs_b
-from cupyx.scipy.ndimage import distance_transform_edt
+from scipy.ndimage import distance_transform_edt
 
 import logging
 from . import DTYPE_f
@@ -242,9 +242,10 @@ class SmoothnGPU:
         
         for i in range(self.n_fields):
             if cp.any(self.missing):
-                nearest_neighbour = distance_transform_edt(self.missing, sampling=self.spacing, return_distances=False, return_indices=True)
+                nearest_neighbour = distance_transform_edt(self.missing.get(), sampling=self.spacing,
+                                                           return_distances=False, return_indices=True)
                 if self.n_dims == 1:
-                    neighbour_index = cp.squeeze(nearest_neighbour)
+                    neighbour_index = np.squeeze(nearest_neighbour)
                 else:
                     neighbour_index = tuple(nearest_neighbour[i] for i in range(nearest_neighbour.shape[0]))
                 self.f[i][self.missing] = self.f[i][neighbour_index][self.missing]
