@@ -17,8 +17,8 @@ Use the following command to install from GitHub:
 The OpenPIV documentation is readily accessible on the project's webpage at https://openpiv.readthedocs.org. For information on how to use the modules, see the tutorial notebooks below.
 
 ## Tutorials
-- [Basic tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-cpu/blob/main/openpiv_gpu/tutorials/openpiv_python_cpu_tutorial.ipynb)
-- [Advanced tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-cpu/blob/main/openpiv_gpu/tutorials/openpiv_python_cpu_advanced_tutorial.ipynb)
+- [Basic tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-cpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_tutorial.ipynb)
+- [Advanced tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-cpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_advanced_tutorial.ipynb)
 
 ## Contributors
 1. [OpenPIV team](https://groups.google.com/forum/#!forum/openpiv-users)
