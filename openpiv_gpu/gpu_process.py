@@ -310,7 +310,8 @@ class piv_gpu:
                     all(not np.iscomplex(frame).any() for frame in frames), \
                         "Both frames must be an ndarray of {} values with shape {}.".format("real", self.frame_shape)
         
-        return self.gpu_process(frame_a, frame_b)
+        u, v = self.gpu_process(frame_a, frame_b)
+        return u.get(), v.get()
     
     @property
     def coords(self):
@@ -1472,7 +1473,7 @@ extern "C" __global__ void cuda_interpolate_masked_frame(
     INT i = t / wd;
     
     // Check whether the indices are inside the domain.
-    INT in = (j >= 0 && j < wd && i >= 0 && i < ht && !mask[i * wd + j]);
+    bool in = !mask[i * wd + j];
     
     if (in) {
         FLOAT xi = x[i * wd + j] + up[i * wd + j] * dt;
@@ -1517,29 +1518,24 @@ extern "C" __global__ void cuda_interpolate_frame(
     INT j = t % wd;
     INT i = t / wd;
     
-    // Check whether the indices are inside the domain.
-    INT in = (j >= 0 && j < wd && i >= 0 && i < ht);
+    FLOAT xi = x[i * wd + j] + up[i * wd + j] * dt;
+    FLOAT yi = y[i * wd + j] + vp[i * wd + j] * dt;
+    INT xl = floorf(xi);
+    INT yu = floorf(yi);
     
-    if (in) {
-        FLOAT xi = x[i * wd + j] + up[i * wd + j] * dt;
-        FLOAT yi = y[i * wd + j] + vp[i * wd + j] * dt;
-        INT xl = floorf(xi);
-        INT yu = floorf(yi);
-        
-        if (yu < 0) {yu = 0;} else if (yu > ht - 2) {yu = ht - 2;}
-        if (xl < 0) {xl = 0;} else if (xl > wd - 2) {xl = wd - 2;}
-        
-        INT yd = yu + 1;
-        INT xr = xl + 1;
-        
-        FLOAT ful = f[yu * wd + xl];
-        FLOAT fur = f[yu * wd + xr];
-        FLOAT fdl = f[yd * wd + xl];
-        FLOAT fdr = f[yd * wd + xr];
-        
-        // Apply bilinear interpolation/extrapolation coordinates mapping.
-        fi[i * wd + j] = ((yi - yu) * (xr - xi) * fdl + (yi - yu) * (xi - xl) * fdr +
-                          (yd - yi) * (xr - xi) * ful + (yd - yi) * (xi - xl) * fur);
-    }
+    if (yu < 0) {yu = 0;} else if (yu > ht - 2) {yu = ht - 2;}
+    if (xl < 0) {xl = 0;} else if (xl > wd - 2) {xl = wd - 2;}
+    
+    INT yd = yu + 1;
+    INT xr = xl + 1;
+    
+    FLOAT ful = f[yu * wd + xl];
+    FLOAT fur = f[yu * wd + xr];
+    FLOAT fdl = f[yd * wd + xl];
+    FLOAT fdr = f[yd * wd + xr];
+    
+    // Apply bilinear interpolation/extrapolation coordinates mapping.
+    fi[i * wd + j] = ((yi - yu) * (xr - xi) * fdl + (yi - yu) * (xi - xl) * fdr +
+                      (yd - yi) * (xr - xi) * ful + (yd - yi) * (xi - xl) * fur);
 }
 """
