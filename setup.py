@@ -8,8 +8,8 @@ with open(path.join(this_directory, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 
 setup(
-    name="OpenPIV-Python-CPU",
-    version="1.1.0",
+    name="OpenPIV-Python-GPU",
+    version="1.0.0",
     packages=find_packages(),
     include_package_data=True,
     long_description=long_description,
