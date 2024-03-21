@@ -9,9 +9,12 @@ Algorithms for PIV image processing with a GPU.
 OpenPIV-Python is currently under active development, which means it might contain some bugs, and its API is subject to change. The algorithms have been tested on both Windows (work station and laptops) and Linux (Google Colab).
 
 ## Installation
-First, install CuPy based on your CUDA Toolkit version:
+First, install CuPy based on your CUDA Toolkit version. For CUDA Toolkit versions 11.2 ~ 11.8 use:
 
     pip install cupy-cuda11x
+
+For CUDA Toolkit versions 12.x use:
+
     pip install cupy-cuda12x
 
 Then, use the following command to clone the repository:
