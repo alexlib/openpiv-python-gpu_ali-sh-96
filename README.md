@@ -27,6 +27,7 @@ The OpenPIV documentation is readily accessible on the project's webpage at http
 
 ## Tutorials
 - [Basic tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-gpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_tutorial.ipynb)
+- [Batching tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-gpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_batching_tutorial.ipynb)
 - [Advanced tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-gpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_advanced_tutorial.ipynb)
 
 ## Contributors
