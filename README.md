@@ -23,7 +23,7 @@ Then, use the following command to clone the repository:
 Finally, add the directory of the cloned repository to your PYTHONPATH.
 
 ## Documentation
-The OpenPIV documentation is readily accessible on the project's webpage at https://openpiv.readthedocs.org. For information on how to use the modules, see the tutorial notebooks below.
+The OpenPIV documentation is readily accessible on the project's webpage at https://openpiv.readthedocs.org. For information on how to use the modules, see the tutorial notebooks below. Also see [openpiv-python-cpu](https://github.com/ali-sh-96/openpiv-python-cpu) for more tutorials on stitching and masking in PIV. 
 
 ## Tutorials
 - [Basic tutorial](https://colab.research.google.com/github/ali-sh-96/openpiv-python-gpu/blob/main/openpiv_gpu/tutorials/openpiv_python_gpu_tutorial.ipynb)
