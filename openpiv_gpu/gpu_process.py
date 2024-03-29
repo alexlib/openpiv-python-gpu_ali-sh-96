@@ -52,6 +52,8 @@ class piv_gpu:
     
     Attributes
     ----------
+    field_shape : tuple
+        Shape of the resulting velocity fields.
     coords : tuple
         A tuple of 2D arrays, (x, y) coordinates, where the velocity field is computed.
     field_mask : ndarray
@@ -312,6 +314,11 @@ class piv_gpu:
         
         u, v = self.gpu_process(frame_a, frame_b)
         return u.get(), v.get()
+    
+    @property
+    def field_shape(self):
+        "Returns the field shape."
+        return self.gpu_process.piv_fields[-1].field_shape
     
     @property
     def coords(self):
